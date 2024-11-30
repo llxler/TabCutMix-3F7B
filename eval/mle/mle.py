@@ -52,28 +52,28 @@ _MODELS = {
         #         'alpha': [0.0001, 0.001]
         #     }
         # },
-        # {
-        #     'class': RandomForestClassifier, # 48
-        #     'kwargs': {
-        #          'max_depth': [8, 16, None], 
-        #          'min_samples_split': [2, 4, 8],
-        #          'min_samples_leaf': [1, 2, 4, 8],
-        #         'n_jobs': [-1]
-
-        #     }
-        # },
         {
-            'class': XGBClassifier, # 36
+            'class': RandomForestClassifier, # 48
             'kwargs': {
-                 'n_estimators': [10, 50, 100],
-                 'min_child_weight': [1, 10], 
-                 'max_depth': [5, 10, 20],
-                 'gamma': [0.0, 1.0],
-                 'objective': ['binary:logistic'],
-                 'nthread': [-1],
-                 'tree_method': ['gpu_hist']
-            },
+                 'max_depth': [8, 16, None], 
+                 'min_samples_split': [2, 4, 8],
+                 'min_samples_leaf': [1, 2, 4, 8],
+                'n_jobs': [-1]
+
+            }
         }
+        # {
+        #     'class': XGBClassifier, # 36
+        #     'kwargs': {
+        #          'n_estimators': [10, 50, 100],
+        #          'min_child_weight': [1, 10], 
+        #          'max_depth': [5, 10, 20],
+        #          'gamma': [0.0, 1.0],
+        #          'objective': ['binary:logistic'],
+        #          'nthread': [-1],
+        #          'tree_method': ['gpu_hist']
+        #     },
+        # }
 
     ],
     'multiclass': [ # 132
@@ -204,7 +204,7 @@ def feat_transform(data, info, label_encoder = None, encoders = None, cmax = Non
             if encoder:
                 feature = encoder.transform(col)
             else:
-                encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
+                encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
                 encoders[idx] = encoder
                 feature = encoder.fit_transform(col)
                 
@@ -294,7 +294,7 @@ class FeatureMaker:
                     if encoder:
                         feature = encoder.transform(col)
                     else:
-                        encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
+                        encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
                         self.encoders[index] = encoder
                         feature = encoder.fit_transform(col)
 
@@ -512,6 +512,7 @@ def _evaluate_binary_classification(train, test, info):
             try:
                 model.fit(x_trains, y_trains)
             except ValueError:
+                print("error 515 row")
                 pass
 
             if len(unique_labels) == 1:

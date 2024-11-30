@@ -11,9 +11,9 @@ from sdmetrics.reports.single_table import QualityReport, DiagnosticReport
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataname', type=str, default='adult')
-parser.add_argument('--model', type=str, default='tabsyn')
-parser.add_argument('--path', type=str, default = None, help='The file path of the synthetic data')
+parser.add_argument('--dataname', type=str, default='shoppers')
+parser.add_argument('--model', type=str, default='tabddpm')
+parser.add_argument('--path', type=str, default = "shoppers_sampled_-20.csv", help='The file path of the synthetic data')
 
 args = parser.parse_args()
 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     Shape = quality['Score'][0]
     Trend = quality['Score'][1]
 
-    with open(f'{save_dir}/quality.txt', 'w') as f:
+    with open(f'{save_dir}/quality_-20.txt', 'w') as f:
         f.write(f'{Shape}\n')
         f.write(f'{Trend}\n')
 

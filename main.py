@@ -13,3 +13,7 @@ if __name__ == '__main__':
     main_fn = execute_function(args.method, args.mode)
 
     main_fn(args)
+
+# python main.py --dataname shoppers --method tabddpm --mode train
+# python main.py --dataname shoppers --method tabddpm --mode sample --save_path fucker.csv        # 原始data
+# python main.py --dataname shoppers --method tabddpm --mode sample --save_path step_-20.csv    # 采用-20cc的data

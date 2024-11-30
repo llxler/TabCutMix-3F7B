@@ -18,8 +18,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataname', type=str, default='adult')
-parser.add_argument('--model', type=str, default='real')
+parser.add_argument('--dataname', type=str, default='shoppers')
+parser.add_argument('--model', type=str, default='tabddpm')
 
 args = parser.parse_args()
 
@@ -69,7 +69,8 @@ if __name__ == '__main__':
     dataname = args.dataname
     model = args.model
 
-    syn_path = f'synthetic/{dataname}/{model}.csv'
+    # syn_path = f'synthetic/{dataname}/{model}.csv'
+    syn_path = 'shoppers_sampled.csv'
     real_path = f'synthetic/{dataname}/real.csv'
 
     data_dir = f'data/{dataname}' 

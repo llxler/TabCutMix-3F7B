@@ -15,9 +15,9 @@ pd.options.mode.chained_assignment = None
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataname', type=str, default='adult')
-parser.add_argument('--model', type=str, default='model')
-parser.add_argument('--path', type=str, default = None, help='The file path of the synthetic data')
+parser.add_argument('--dataname', type=str, default='shoppers')
+parser.add_argument('--model', type=str, default='tabddpm')
+parser.add_argument('--path', type=str, default = "shoppers_sampled.csv", help='The file path of the synthetic data')
 
 
 args = parser.parse_args()
@@ -44,7 +44,6 @@ if __name__ == '__main__':
 
     syn_data = pd.read_csv(syn_path)
     real_data = pd.read_csv(real_path)
-
 
     ''' Special treatment for default dataset and CoDi model '''
 
@@ -152,6 +151,6 @@ if __name__ == '__main__':
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
-    with open(f'{save_dir}/{model}.txt', 'w') as f:
+    with open(f'{save_dir}/synmeter_{model}_-20_cutmix.txt', 'w') as f:
         f.write(f'{Alpha_Precision_all}\n')
         f.write(f'{Beta_Recall_all}\n')
